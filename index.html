@@ -47,14 +47,22 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
+    <script>
+        function setUserAgent(iframe) {
+            const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
+            iframe.contentWindow.navigator.__defineGetter__('userAgent', function(){
+                return userAgent;
+            });
+        }
+    </script>
 </head>
 <body>
     <h1>My Streaming Services</h1>
     <div class="container">
-        <a class="tile" href="https://www.hulu.com/?web=1" target="content-frame">Hulu</a>
-        <a class="tile" href="max.html" target="content-frame">Max</a>
-        <a class="tile" href="http://192.168.1.134:32400/web/index.html#!/" target="content-frame">Plex</a>
+        <a class="tile" href="#" onclick="document.getElementById('content-frame').src='https://www.hulu.com'">Hulu</a>
+        <a class="tile" href="#" onclick="document.getElementById('content-frame').src='https://www.max.com'; setUserAgent(document.getElementById('content-frame'));">Max</a>
+        <a class="tile" href="#" onclick="document.getElementById('content-frame').src='http://192.168.1.134:32400/web/index.html#!/'">Plex</a>
     </div>
-    <iframe name="content-frame"></iframe>
+    <iframe id="content-frame" name="content-frame"></iframe>
 </body>
 </html>
